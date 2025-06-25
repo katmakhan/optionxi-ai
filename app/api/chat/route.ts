@@ -1,14 +1,23 @@
 import { groq } from "@ai-sdk/groq";
 import { frontendTools } from "@assistant-ui/react-ai-sdk";
 import { streamText, experimental_createMCPClient } from "ai";
+import type { ToolSet } from "ai";
 
 export const runtime = "edge";
 export const maxDuration = 30;
 
+// Define proper types for MCP client and tools
+interface MCPClient {
+  tools(): Promise<ToolSet>;
+  close(): Promise<void>;
+}
+
+type MCPTools = ToolSet;
+
 // Helper function to create MCP clients with proper error handling
 async function createMCPClients() {
-  const clients = [];
-  const allTools = {};
+  const clients: MCPClient[] = [];
+  const allTools: MCPTools = {};
 
   try {
     // Primary MCP server
@@ -30,14 +39,14 @@ async function createMCPClients() {
           onUncaughtError: (error) => {
             console.error("MCP uncaught error:", error);
           }
-        });
+        }) as MCPClient;
         
         clients.push(customClient);
         
         // Get tools with timeout
         const clientTools = await Promise.race([
           customClient.tools(),
-          new Promise((_, reject) => 
+          new Promise<never>((_, reject) => 
             setTimeout(() => reject(new Error("Tool loading timeout")), 10000)
           )
         ]);
@@ -70,13 +79,13 @@ async function createMCPClients() {
           onUncaughtError: (error) => {
             console.error("Secondary MCP uncaught error:", error);
           }
-        });
+        }) as MCPClient;
         
         clients.push(secondaryClient);
         
         const secondaryTools = await Promise.race([
           secondaryClient.tools(),
-          new Promise((_, reject) => 
+          new Promise<never>((_, reject) => 
             setTimeout(() => reject(new Error("Secondary tool loading timeout")), 10000)
           )
         ]);
@@ -99,13 +108,13 @@ async function createMCPClients() {
 }
 
 // Safe client cleanup function
-async function safeCloseClients(clients: any[]) {
+async function safeCloseClients(clients: MCPClient[]) {
   const closePromises = clients.map(async (client) => {
     try {
       // Add a timeout to prevent hanging
       await Promise.race([
         client.close(),
-        new Promise((_, reject) => 
+        new Promise<never>((_, reject) => 
           setTimeout(() => reject(new Error("Close timeout")), 5000)
         )
       ]);
@@ -126,8 +135,8 @@ async function safeCloseClients(clients: any[]) {
 export async function POST(req: Request) {
   const { messages, system, tools } = await req.json();
   
-  let mcpClients: any[] = [];
-  let mcpTools = {};
+  let mcpClients: MCPClient[] = [];
+  let mcpTools: MCPTools = {};
 
   try {
     const mcpResult = await createMCPClients();
