@@ -23,15 +23,10 @@ export const Assistant = () => {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Build Your Own ChatGPT UX
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
                   <BreadcrumbPage>
-                    Starter Template
+                    OptionXi AI Chat
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>

@@ -32,7 +32,8 @@ export const ToolFallback: ToolCallContentPartComponent = ({
               <pre className="whitespace-pre-wrap">
                 {typeof result === "string"
                   ? result
-                  : JSON.stringify(result, null, 2)}
+                  : JSON.stringify(result, null, 2)
+                  }
               </pre>
             </div>
           )}

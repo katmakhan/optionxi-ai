@@ -84,25 +84,35 @@ const ThreadWelcome: FC = () => {
 
 const ThreadWelcomeSuggestions: FC = () => {
   return (
-    <div className="mt-3 flex w-full items-stretch justify-center gap-4">
+    <div className="mt-3 grid w-full grid-cols-2 gap-4">
       <ThreadPrimitive.Suggestion
         className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-        prompt="What is the weather in Tokyo?"
+        prompt="What are the top gainers?"
         method="replace"
         autoSend
       >
         <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is the weather in Tokyo?
+          What are the top gainers?
         </span>
       </ThreadPrimitive.Suggestion>
       <ThreadPrimitive.Suggestion
         className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
-        prompt="What is assistant-ui?"
+        prompt="What stocks are currently breaking 52 week high?"
         method="replace"
         autoSend
       >
         <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
-          What is assistant-ui?
+         What stocks are near 52 week high?
+        </span>
+      </ThreadPrimitive.Suggestion>
+      <ThreadPrimitive.Suggestion
+        className="hover:bg-muted/80 flex max-w-sm grow basis-0 flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in"
+        prompt="What stocks are currently breaking 52 week low?"
+        method="replace"
+        autoSend
+      >
+        <span className="line-clamp-2 text-ellipsis text-sm font-semibold">
+         What stocks are near 52 week low?
         </span>
       </ThreadPrimitive.Suggestion>
     </div>
