@@ -144,7 +144,8 @@ export async function POST(req: Request) {
     mcpTools = mcpResult.tools;
 
     const result = streamText({
-      model: groq("llama-3.3-70b-versatile"),
+      // model: groq("llama-3.3-70b-versatile"),
+      model:groq("llama3-70b-8192"),
       messages,
       toolCallStreaming: true,
       system,
