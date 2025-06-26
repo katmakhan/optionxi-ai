@@ -145,7 +145,8 @@ export async function POST(req: Request) {
 
     const result = streamText({
       // model: groq("llama-3.3-70b-versatile"),
-      model:groq("llama3-70b-8192"),
+      // model:groq("llama3-70b-8192"),
+      model:groq("gemma2-9b-it"),
       messages,
       toolCallStreaming: true,
       system,
