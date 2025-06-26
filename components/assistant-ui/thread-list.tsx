@@ -3,30 +3,28 @@ import {
   ThreadListItemPrimitive,
   ThreadListPrimitive,
 } from "@assistant-ui/react";
-import { ArchiveIcon, PlusIcon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { ArchiveIcon } from "lucide-react";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 
 export const ThreadList: FC = () => {
   return (
     <ThreadListPrimitive.Root className="flex flex-col items-stretch gap-1.5">
-      <ThreadListNew />
+      {/* <ThreadListNew /> */}
       <ThreadListItems />
     </ThreadListPrimitive.Root>
   );
 };
 
-const ThreadListNew: FC = () => {
-  return (
-    <ThreadListPrimitive.New asChild>
-      <Button className="data-[active]:bg-muted hover:bg-muted flex items-center justify-start gap-1 rounded-lg px-2.5 py-2 text-start" variant="ghost">
-        <PlusIcon />
-        New Thread
-      </Button>
-    </ThreadListPrimitive.New>
-  );
-};
+// const ThreadListNew: FC = () => {
+//   return (
+//     <ThreadListPrimitive.New asChild>
+//       <Button className="data-[active]:bg-muted hover:bg-muted flex items-center justify-start gap-1 rounded-lg px-2.5 py-2 text-start" variant="ghost">
+//         <PlusIcon />
+//         New Thread
+//       </Button>
+//     </ThreadListPrimitive.New>
+//   );
+// };
 
 const ThreadListItems: FC = () => {
   return <ThreadListPrimitive.Items components={{ ThreadListItem }} />;
